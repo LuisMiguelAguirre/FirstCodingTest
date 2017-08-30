@@ -1,53 +1,55 @@
 package com.example.admin.firstcodingtest;
-import java.util.Hashtable;
-import java.util.Set;
-import java.util.Iterator;
+
 /**
- * Created by Admin on 8/29/2017.
+ * Created by Luis Aguirre on 8/29/2017.
+ *
  */
 
 public class CodingTest {
     public static void main(String[] args) {
-        boolean divisibleby3 = false;
-        boolean divisibleby5 = false;
-        for (int i=1; i<=20;i++){
-
-            if (i%3==0){
-                divisibleby3 = true;
-            }
-            if (i%5==0){
-                divisibleby5 = true;
-            }
-
-            if (divisibleby3 == false && divisibleby5 == false  )
-                System.out.println(i);
-            else{
-                if (divisibleby3 == true && divisibleby5 == true){
-                    printFizzBuss("FizzBuzz");
-                }else{
-                    if(divisibleby3==true){
-                        printFizzBuss("Fizz");
-                    }else if (divisibleby5==true){
-                        printFizzBuss("Buzz");
-                    }
-                }
-            }
-            divisibleby3 = false;
-            divisibleby5= false;
-
-
-
-
-        }
+        System.out.println("========== First algorithm ==========");
+        divisible();
+        System.out.println("========== Second algorithm ==========");
         duplicatedStrings();
 
     }
 
-    public static void printFizzBuss(String word){
+    private static void divisible(){
+        boolean divisibleBy3 = false;
+        boolean divisibleBy5 = false;
+        for (int i=1; i<=20;i++) {
+
+            if (i % 3 == 0) {
+                divisibleBy3 = true;
+            }
+            if (i % 5 == 0) {
+                divisibleBy5 = true;
+            }
+
+            if (!divisibleBy3 && !divisibleBy5)
+                System.out.println(i);
+            else {
+                if (divisibleBy3 && divisibleBy5) {
+                    printFizzBuss("FizzBuzz");
+                } else {
+                    if (divisibleBy3) {
+                        printFizzBuss("Fizz");
+                    } else //if (divisibleBy5 == true) {
+                        printFizzBuss("Buzz");
+                    //}
+                }
+            }
+            divisibleBy3 = false;
+            divisibleBy5 = false;
+
+        }
+    }
+
+    private static void printFizzBuss(String word){
         System.out.println(word);
     }
 
-    public static void duplicatedStrings(){
+    private static void duplicatedStrings(){
         java.util.ArrayList<String> stringArrayList = new java.util.ArrayList<>();
         stringArrayList.add("A");
         stringArrayList.add("B");
@@ -56,37 +58,22 @@ public class CodingTest {
         stringArrayList.add("D");
         stringArrayList.add("B");
         stringArrayList.add("E");
+        stringArrayList.add("E");
 
-        java.util.Hashtable hcounter = new java.util.Hashtable();
-        String value = "";
-        String str;
+        java.util.Map<String, Integer> letters = new java.util.HashMap<>();
 
-
-        for (int i = 0; i< stringArrayList.size();i++){
-            value = stringArrayList.get(i);
-            int result = (int) hcounter.get(value);
-
-
-            if (hcounter.contains(value)){
-                hcounter.put(value,  result + 1);
-            }else{
-                hcounter.put(value, 1);
+        for (String letter : stringArrayList) {
+            if(letters.containsKey(letter)) {
+                letters.put(letter, (letters.get(letter) + 1));
             }
-        }
-        System.out.println("Here");
-        Set<String> keys = hcounter.keySet();
-        Iterator<String> itr = keys.iterator();
-
-        while (itr.hasNext()) {
-            str = itr.next();
-            if ((int)hcounter.get(str) > 1){
-                System.out.println(hcounter.get(str));
+            else {
+                letters.put(letter, 1);
             }
         }
 
-
-
-
+        for(String key: letters.keySet())
+            if (letters.get(key) > 1) {
+                System.out.println(key);
+            }
     }
-
 }
